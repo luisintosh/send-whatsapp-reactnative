@@ -19,7 +19,7 @@ class InfoTab extends Component {
           <CardItem>
             <Body>
               <H3>Discover more apps in our website.</H3>
-              <Button onPress={this.openTequilapps()} transparent iconLeft>
+              <Button onPress={this.openTequilapps} transparent iconLeft>
                 <Icon name="planet"/>
                 <Text>https://www.tequilapps.com</Text>
               </Button>
