@@ -1,7 +1,9 @@
 import React from 'react';
 import Expo from 'expo';
-import { StyleSheet, View } from 'react-native';
-import {Container, Header, Body, Title} from 'native-base';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
+import {Container, Header, Body, Title, StyleProvider} from 'native-base';
+import getTheme from './native-base-theme/components';
+import theme from './native-base-theme/variables/variables';
 
 import HomeTabs from './src/home/tabs/HomeTabs';
 
@@ -26,15 +28,17 @@ export default class App extends React.Component {
       return null;
     }
     return (
-      <Container>
-        <View style={styles.statusBar} />
-        <Header>
-          <Body>
+      <StyleProvider style={getTheme(theme)}>
+        <Container>
+          <View style={styles.statusBar} />
+          <Header>
+            <Body>
             <Title>Open in WhatsApp</Title>
-          </Body>
-        </Header>
-        <HomeTabs/>
-      </Container>
+            </Body>
+          </Header>
+          <HomeTabs/>
+        </Container>
+      </StyleProvider>
     );
   }
 }
@@ -42,5 +46,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   statusBar: {
     height: Expo.Constants.statusBarHeight,
-  }
+    backgroundColor: theme.statusBarColor
+  },
 });

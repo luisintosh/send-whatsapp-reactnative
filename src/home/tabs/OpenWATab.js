@@ -14,6 +14,9 @@ class OpenWATab extends Component {
       dialCodeSelected: undefined,
       phoneNumber: undefined,
     };
+
+    this.sendWAMessage.bind(this);
+    this.callToNumber.bind(this);
   }
 
   async componentWillMount() {
@@ -148,11 +151,11 @@ class OpenWATab extends Component {
                        keyboardType="numeric"/>
               </Item>
 
-              <Button style={styles.sendBtn} onPress={() => this.sendWAMessage().bind(this)} rounded block>
+              <Button style={styles.sendBtn} onPress={() => this.sendWAMessage()} rounded block primary>
                 <Text style={styles.sendBtnTxt}>Send Message</Text>
               </Button>
 
-              <Button style={styles.callBtn} onPress={() => this.callToNumber().bind(this)} rounded block light>
+              <Button style={styles.callBtn} onPress={() => this.callToNumber()} rounded block light>
                 <Text style={styles.callBtnTxt}>Normal Call</Text>
               </Button>
             </Form>
@@ -190,7 +193,6 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
   sendBtn: {
-    backgroundColor: '#01E675',
     marginTop: 25
   },
   sendBtnTxt: {

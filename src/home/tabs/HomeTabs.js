@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Text} from 'react-native'
+import {StyleSheet, Text} from 'react-native'
 import {Tabs, Tab, TabHeading, Icon, ScrollableTab} from 'native-base';
 
 import OpenWATab from './OpenWATab';
 import HistoryTab from './HistoryTab';
 import InfoTab from './InfoTab';
+import Expo from "expo";
 
 class HomeTabs extends Component {
 
