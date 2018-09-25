@@ -10,21 +10,29 @@ class OpenWATab extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = props.defaultPhone || {
       dialCodeSelected: undefined,
       phoneNumber: undefined,
-    }
+    };
   }
 
   async componentWillMount() {
     const currentLocale = await Expo.DangerZone.Localization.getCurrentDeviceCountryAsync();
     const dialCode = countryCodes.filter( country => country.code === currentLocale);
     // auto select the current device country code
-    if (dialCode && dialCode[0]) {
+    if (dialCode && dialCode[0] && !this.state.dialCodeSelected) {
       this.setState({
         dialCodeSelected: dialCode[0].dial_code
       });
     }
+  }
+
+  componentWillReceiveProps(props) {
+    // will update the view
+    this.setState({
+      dialCodeSelected: props.defaultPhone.dialCode,
+      phoneNumber: props.defaultPhone.phone,
+    });
   }
 
   /**
@@ -43,6 +51,7 @@ class OpenWATab extends Component {
    */
   onPhoneValueChanged(value) {
     value = value.replace(' ', '');
+
     this.setState({
       phoneNumber: value
     });
@@ -75,7 +84,7 @@ class OpenWATab extends Component {
       }
 
     } catch (e) {
-      Alert.alert('Error! We can\'t save the history');
+      console.log('saveHistory', 'Error! We can\'t save the history');
     }
   }
 
@@ -84,8 +93,14 @@ class OpenWATab extends Component {
    */
   sendWAMessage() {
     const {dialCodeSelected, phoneNumber} = this.state;
-    Linking.openURL(`https://wa.me/${dialCodeSelected}${phoneNumber}`);
-    this.saveHistory(dialCodeSelected, phoneNumber)
+
+    if (typeof phoneNumber === 'string' && phoneNumber.length >= 10) {
+      Linking.openURL(`https://wa.me/${dialCodeSelected}${phoneNumber}`);
+      this.saveHistory(dialCodeSelected, phoneNumber)
+
+    } else {
+      Alert.alert('Please enter a valid phone number');
+    }
   }
 
   /**
@@ -128,14 +143,15 @@ class OpenWATab extends Component {
               <Icon name="phone-portrait"/>
               <Input placeholder="Phone number"
                      value={this.state.phoneNumber}
-                     onValueChange={this.onPhoneValueChanged.bind(this)}/>
+                     onChangeText={this.onPhoneValueChanged.bind(this)}
+                     keyboardType="numeric"/>
             </Item>
 
-            <Button style={styles.sendBtn} onPress={this.sendWAMessage.bind(this)} rounded block>
+            <Button style={styles.sendBtn} onPress={() => this.sendWAMessage().bind(this)} rounded block>
               <Text style={styles.sendBtnTxt}>Send Message</Text>
             </Button>
 
-            <Button style={styles.callBtn} onPress={this.callToNumber.bind(this)} rounded block light>
+            <Button style={styles.callBtn} onPress={() => this.callToNumber().bind(this)} rounded block light>
               <Text style={styles.callBtnTxt}>Normal Call</Text>
             </Button>
           </Form>
