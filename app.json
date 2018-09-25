@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tequilapps.open-in-whatsapp"
+    },
+    "android": {
+      "package": "com.tequilapps.open-in-whatsapp"
     }
   }
 }
