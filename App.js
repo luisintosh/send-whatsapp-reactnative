@@ -13,7 +13,7 @@ export default class App extends React.Component {
     super();
     this.state={
       isReady: false
-    }
+    };
   }
 
   async componentWillMount() {

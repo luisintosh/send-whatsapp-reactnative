@@ -117,50 +117,54 @@ class OpenWATab extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <ScrollView style={styles.container}>
-          <View style={styles.container}>
-            <View style={styles.titleSection}>
-              <H1 style={styles.h1Text}>Send WhatsApp message without adding contact</H1>
-            </View>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: 'space-between'
+          }}
+          showsVerticalScrollIndicator>
+          <View style={styles.titleSection}>
+            <H1 style={styles.h1Text}>Send WhatsApp message without adding contact</H1>
+          </View>
 
-            <View style={styles.phoneSection}>
-              <Form>
+          <View style={styles.phoneSection}>
+            <Form>
 
-                <Item style={styles.inputs} rounded>
-                  <Icon name="map"/>
-                  <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon name="ios-arrow-down-outline"/>}
-                    style={{width: undefined}}
-                    placeholder="Select country"
-                    selectedValue={this.state.dialCodeSelected}
-                    onValueChange={this.onDialCodeValueChanged.bind(this)}
-                  >
-                    {countryCodes.map((country, index) => <Picker.Item
-                      key={index}
-                      label={`${country.name} +${country.dial_code}`}
-                      value={country.dial_code}
-                    />)}
-                  </Picker>
-                </Item>
+              <Item style={styles.inputs} rounded>
+                <Icon name="map"/>
+                <Picker
+                  mode="dropdown"
+                  iosIcon={<Icon name="ios-arrow-down-outline"/>}
+                  style={{width: undefined}}
+                  placeholder="Select country"
+                  selectedValue={this.state.dialCodeSelected}
+                  onValueChange={this.onDialCodeValueChanged.bind(this)}
+                >
+                  {countryCodes.map((country, index) => <Picker.Item
+                    key={index}
+                    label={`${country.name} +${country.dial_code}`}
+                    value={country.dial_code}
+                  />)}
+                </Picker>
+              </Item>
 
-                <Item style={styles.inputs} rounded>
-                  <Icon name="phone-portrait"/>
-                  <Input placeholder="Phone number"
-                         value={this.state.phoneNumber}
-                         onChangeText={this.onPhoneValueChanged.bind(this)}
-                         keyboardType="numeric"/>
-                </Item>
+              <Item style={styles.inputs} rounded>
+                <Icon name="phone-portrait"/>
+                <Input placeholder="Phone number"
+                       value={this.state.phoneNumber}
+                       onChangeText={this.onPhoneValueChanged.bind(this)}
+                       keyboardType="numeric"/>
+              </Item>
 
-                <Button style={styles.sendBtn} onPress={() => this.sendWAMessage()} rounded block primary>
-                  <Text style={styles.sendBtnTxt}>Send Message</Text>
-                </Button>
+              <Button style={styles.sendBtn} onPress={() => this.sendWAMessage()} rounded block primary>
+                <Text style={styles.sendBtnTxt}>Send Message</Text>
+              </Button>
 
-                <Button style={styles.callBtn} onPress={() => this.callToNumber()} rounded block light>
-                  <Text style={styles.callBtnTxt}>Normal Call</Text>
-                </Button>
-              </Form>
-            </View>
+              <Button style={styles.callBtn} onPress={() => this.callToNumber()} rounded block light>
+                <Text style={styles.callBtnTxt}>Normal Call</Text>
+              </Button>
+            </Form>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -175,9 +179,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleSection: {
-    flex: 1,
     backgroundColor: '#1ebea5',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },
