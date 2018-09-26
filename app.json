@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "open-in-whatsapp",
+    "name": "Send WhatsApp Message",
     "description": "This project is really great.",
     "slug": "open-in-whatsapp",
     "privacy": "public",
@@ -22,10 +22,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tequilapps.open-in-whatsapp"
+      "bundleIdentifier": "com.tequilapps.openinwhatsapp"
     },
     "android": {
-      "package": "com.tequilapps.open-in-whatsapp"
+      "package": "com.tequilapps.openinwhatsapp"
     }
   }
 }
